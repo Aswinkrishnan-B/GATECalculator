@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCS Virtual Calculator Clone</title>
+  <style>
+    body {
+      background: #1e2a38;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .calculator {
+      background: #2f3e4d;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0,0,0,0.4);
+      width: 320px;
+    }
+    .display {
+      background: #000;
+      color: #0f0;
+      font-size: 22px;
+      text-align: right;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    button {
+      padding: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #d3d3d3;
+      transition: background 0.2s;
+    }
+    button:active {
+      background: #aaa;
+    }
+    .func { background: #4da6ff; color: #fff; }
+    .op { background: #ff9933; color: #fff; }
+    .wide { grid-column: span 2; }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div id="display" class="display">0</div>
+    <div class="buttons">
+      <button class="func" onclick="clearDisplay()">AC</button>
+      <button class="func" onclick="backspace()">⌫</button>
+      <button class="func" onclick="insert('(')">(</button>
+      <button class="func" onclick="insert(')')">)</button>
+      <button class="op" onclick="insert('/')">÷</button>
+
+      <button onclick="insert('7')">7</button>
+      <button onclick="insert('8')">8</button>
+      <button onclick="insert('9')">9</button>
+      <button class="op" onclick="insert('*')">×</button>
+      <button class="func" onclick="insert('Math.sqrt(')">√</button>
+
+      <button onclick="insert('4')">4</button>
+      <button onclick="insert('5')">5</button>
+      <button onclick="insert('6')">6</button>
+      <button class="op" onclick="insert('-')">−</button>
+      <button class="func" onclick="insert('**2')">x²</button>
+
+      <button onclick="insert('1')">1</button>
+      <button onclick="insert('2')">2</button>
+      <button onclick="insert('3')">3</button>
+      <button class="op" onclick="insert('+')">+</button>
+      <button class="func" onclick="insert('Math.PI')">π</button>
+
+      <button onclick="insert('0')">0</button>
+      <button onclick="insert('.')">.</button>
+      <button class="wide op" onclick="calculate()">=</button>
+      <button class="func" onclick="insert('Math.log10(')">log</button>
+      <button class="func" onclick="insert('Math.sin(')">sin</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    function insert(value) {
+      if (display.innerText === '0') display.innerText = '';
+      display.innerText += value;
+    }
+
+    function clearDisplay() {
+      display.innerText = '0';
+    }
+
+    function backspace() {
+      display.innerText = display.innerText.slice(0, -1) || '0';
+    }
+
+    function calculate() {
+      try {
+        display.innerText = eval(display.innerText);
+      } catch (e) {
+        display.innerText = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
